@@ -69,6 +69,53 @@ fn copy_value(a: u32) {
     println!("{}", a);
 }
 
+fn references_borrowing() {
+    let mut s = String::from("Holla");
+    change(&mut s);
+    println!("borrowing {}", s);
+}
+
+fn change(s: &mut String) {
+    s.push_str(" world!");
+}
+
+struct Address(f32, f32, f32);
+struct User {
+    name: String,
+    email: String,
+    age: u32,
+    address: Address,
+}
+
+impl User {
+    fn get_address(&self) -> f32 {
+        self.address.2
+    }
+
+    fn get_random() -> u32 {
+        rand::thread_rng().gen_range(1..10)
+    }
+}
+
+fn get_struct() {
+    let user = User {
+        name: String::from("ali"),
+        email: String::from("ali@mail.com"),
+        age: 217,
+        address: Address(3.4, 3.5, 4.5),
+    };
+
+    println!(
+        "{} {} {} {} {} rand {}",
+        user.name,
+        user.email,
+        user.age,
+        user.address.0,
+        user.get_address(),
+        User::get_random(),
+    );
+}
+
 fn main() {
     println!("Hello, rust!");
 
@@ -84,6 +131,10 @@ fn main() {
     get_loop();
 
     understand_ownership();
+
+    references_borrowing();
+
+    get_struct();
 
     println!("getNumber {}", multiply_by10(10));
 
