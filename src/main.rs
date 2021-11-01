@@ -2,6 +2,7 @@ use rand::Rng;
 use std::cmp::Ordering;
 use std::io;
 
+mod get_collections;
 mod holla;
 mod routes;
 
@@ -157,6 +158,8 @@ fn main() {
     holla::get_message("Ali");
 
     routes::user::get_index();
+
+    get_collections::get_vector();
 
     println!("getNumber {}", multiply_by10(10));
 
