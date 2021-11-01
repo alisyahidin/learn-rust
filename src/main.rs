@@ -2,6 +2,9 @@ use rand::Rng;
 use std::cmp::Ordering;
 use std::io;
 
+mod holla;
+mod routes;
+
 fn fib(num: i32) -> i32 {
     match num {
         0 => 0,
@@ -88,10 +91,12 @@ struct User {
 }
 
 impl User {
+    // method
     fn get_address(&self) -> f32 {
         self.address.2
     }
 
+    // associated function
     fn get_random() -> u32 {
         rand::thread_rng().gen_range(1..10)
     }
@@ -116,6 +121,17 @@ fn get_struct() {
     );
 }
 
+// enum IPAddress {
+//     Ipv4,
+//     Ipv6,
+// }
+
+fn get_enum() {
+    let address: Option<String> = Some(String::from("Test"));
+    // let ip4 = IPAddress::Ipv4;
+    println!("{}", address.unwrap());
+}
+
 fn main() {
     println!("Hello, rust!");
 
@@ -135,6 +151,12 @@ fn main() {
     references_borrowing();
 
     get_struct();
+
+    get_enum();
+
+    holla::get_message("Ali");
+
+    routes::user::get_index();
 
     println!("getNumber {}", multiply_by10(10));
 
