@@ -1,4 +1,5 @@
 use rand::Rng;
+use regex::Regex;
 use std::cmp::Ordering;
 use std::io;
 
@@ -122,15 +123,32 @@ fn get_struct() {
     );
 }
 
-// enum IPAddress {
-//     Ipv4,
-//     Ipv6,
-// }
+enum Day {
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday,
+}
+
+impl Day {
+    fn is_weekday(&self) -> bool {
+        match self {
+            &Day::Saturday | &Day::Sunday => false,
+            _ => true,
+        }
+    }
+}
 
 fn get_enum() {
     let address: Option<String> = Some(String::from("Test"));
     // let ip4 = IPAddress::Ipv4;
     println!("{}", address.unwrap());
+
+    let d = Day::Saturday;
+    println!("today is weekday? {}", d.is_weekday());
 }
 
 fn main() {
@@ -160,6 +178,14 @@ fn main() {
     routes::user::get_index();
 
     get_collections::get_vector();
+
+    let re = Regex::new(r"(\w{5})").unwrap();
+    let text = "testasd";
+
+    match re.captures(text) {
+        Some(caps) => println!("found match : {}", &caps[0]),
+        None => println!("Not found"),
+    }
 
     println!("getNumber {}", multiply_by10(10));
 
